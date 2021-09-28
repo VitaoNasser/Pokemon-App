@@ -7,6 +7,8 @@
 
 import UIKit
 
+private let reuseIdentifier = "pokedexCell"
+
 class PokedexController: UICollectionViewController {
 
     // MARK: - Properties
@@ -40,8 +42,23 @@ class PokedexController: UICollectionViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
         navigationItem.rightBarButtonItem?.tintColor = .white
+        
+        collectionView.register(PokedexCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
     }
-
 }
+
+extension PokedexController {
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PokedexCell
+        return cell
+    }
+}
+
 
 
