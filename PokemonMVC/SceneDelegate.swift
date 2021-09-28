@@ -19,11 +19,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.makeKeyAndVisible()
         window?.windowScene = windowScene
         
         let layout = UICollectionViewFlowLayout()
-        window?.rootViewController = PokedexController(collectionViewLayout: layout)
-        window?.makeKeyAndVisible()
+        let navController = UINavigationController(rootViewController: PokedexController(collectionViewLayout: layout))
+        window?.rootViewController = navController
         
         
     }
