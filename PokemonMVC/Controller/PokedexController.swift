@@ -14,6 +14,12 @@ class PokedexController: UICollectionViewController {
     // MARK: - Properties
     
     var pokemon = [Pokemon]()
+    
+    let infoView: InfoView = {
+        let view = InfoView()
+        view.layer.cornerRadius = 5
+        return view
+    }()
 
     // MARK: - Init
     
@@ -58,6 +64,12 @@ class PokedexController: UICollectionViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
         
         collectionView.register(PokedexCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        view.addSubview(infoView)
+        infoView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 64, height: 500)
+        
+        infoView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        infoView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -44).isActive = true
         
     }
 }
