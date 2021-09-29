@@ -31,36 +31,55 @@ class InfoView: UIView {
        let label = UILabel()
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.text = "Charmander"
         return label
     }()
     
     let typeLabel: UILabel = {
        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .mainPink()
+        label.text = "TEST: 79"
         return label
     }()
     
     let defenseLabel: UILabel = {
        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .mainPink()
+        label.text = "TEST: 79"
         return label
     }()
     
     let heightLabel: UILabel = {
        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .mainPink()
+        label.text = "TEST: 79"
         return label
     }()
     
     let pokedexIdLabel: UILabel = {
        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .mainPink()
+        label.text = "TEST: 79"
         return label
     }()
     
     let attackLabel: UILabel = {
        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .mainPink()
+        label.text = "TEST: 79"
         return label
     }()
     
     let weightLabel: UILabel = {
        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .mainPink()
+        label.text = "TEST: 79"
         return label
     }()
     
@@ -111,12 +130,12 @@ class InfoView: UIView {
         typeLabel.anchor(top: imageView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 16, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         addSubview(defenseLabel)
-        defenseLabel.anchor(top: imageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        defenseLabel.anchor(top: imageView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: -8, width: 0, height: 0)
         
         let separatorView = UIView()
         separatorView.backgroundColor = .systemGroupedBackground
         addSubview(separatorView)
-        separatorView.anchor(top: typeLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 4, paddingBottom: 0, paddingRight: 4, width: 0, height: 1)
+        separatorView.anchor(top: typeLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 8, paddingLeft: 4, paddingBottom: 0, paddingRight: -4, width: 0, height: 1)
         
         addSubview(heightLabel)
         heightLabel.anchor(top: separatorView.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 16, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -125,10 +144,10 @@ class InfoView: UIView {
         weightLabel.anchor(top: heightLabel.bottomAnchor, left: leftAnchor, bottom: nil, right: nil, paddingTop: 16, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
 
         addSubview(pokedexIdLabel)
-        pokedexIdLabel.anchor(top: separatorView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        pokedexIdLabel.anchor(top: separatorView.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: -8, width: 0, height: 0)
 
         addSubview(attackLabel)
-        attackLabel.anchor(top: pokedexIdLabel.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+        attackLabel.anchor(top: pokedexIdLabel.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: -8, width: 0, height: 0)
         
         addSubview(infoButton)
         infoButton.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: -12, paddingRight: -12, width: 0, height: 50)
