@@ -20,6 +20,7 @@ class Pokemon {
     var description: String?
     var type: String?
     var baseExperience: Int?
+    var evolutionChain: [[String: AnyObject]]?
     
     init(id: Int, dictionary: [String: AnyObject]) {
         
