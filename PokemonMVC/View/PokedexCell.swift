@@ -11,6 +11,12 @@ class PokedexCell: UICollectionViewCell {
     
     // MARK: - Properties
     
+    var pokemon: Pokemon? {
+        didSet {
+            nameLabel.text = pokemon?.name
+        }
+    }
+    
     let imageView: UIImageView = {
        let iv = UIImageView()
         iv.backgroundColor = .systemGroupedBackground
