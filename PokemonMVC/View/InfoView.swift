@@ -28,7 +28,7 @@ class InfoView: UIView {
             guard let weight = pokemon.weight else { return }
             
             imageView.image = pokemon.image
-            nameLabel.text = pokemon.name
+            nameLabel.text = pokemon.name?.capitalized
             
             configureLabel(label: typeLabel, title: "Type", details: type)
             configureLabel(label: defenseLabel, title: "Defense", details: "\(defense)")
@@ -59,7 +59,6 @@ class InfoView: UIView {
        let label = UILabel()
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.text = "Charmander"
         return label
     }()
     
@@ -67,7 +66,6 @@ class InfoView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .mainPink()
-        label.text = "TEST: 79"
         return label
     }()
     
@@ -75,7 +73,6 @@ class InfoView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .mainPink()
-        label.text = "TEST: 79"
         return label
     }()
     
@@ -83,7 +80,6 @@ class InfoView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .mainPink()
-        label.text = "TEST: 79"
         return label
     }()
     
@@ -91,7 +87,6 @@ class InfoView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .mainPink()
-        label.text = "TEST: 79"
         return label
     }()
     
@@ -99,7 +94,6 @@ class InfoView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .mainPink()
-        label.text = "TEST: 79"
         return label
     }()
     
@@ -107,7 +101,6 @@ class InfoView: UIView {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = .mainPink()
-        label.text = "TEST: 79"
         return label
     }()
     
