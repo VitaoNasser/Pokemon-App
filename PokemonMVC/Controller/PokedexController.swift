@@ -64,13 +64,7 @@ class PokedexController: UICollectionViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
         
         collectionView.register(PokedexCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        view.addSubview(infoView)
-        infoView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 64, height: 350)
-        
-        infoView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        infoView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -44).isActive = true
-        
+    
     }
 }
 
@@ -84,6 +78,7 @@ extension PokedexController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PokedexCell
         
         cell.pokemon = pokemon[indexPath.item]
+        cell.delegate = self
         
         return cell
     }
@@ -100,8 +95,23 @@ extension PokedexController: UICollectionViewDelegateFlowLayout {
         let width = (view.frame.width - 36) / 3
         return CGSize(width: width, height: width)
         
-        
     }
     
 }
 
+extension PokedexController: PokedexCellDelegate {
+    
+    func presentInfoView(withPokemon pokemon: Pokemon) {
+        
+        view.addSubview(infoView)
+        infoView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 64, height: 350)
+        
+        infoView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        infoView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -44).isActive = true
+        
+        
+        
+    }
+    
+    
+}
