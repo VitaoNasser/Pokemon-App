@@ -42,6 +42,10 @@ class PokedexController: UICollectionViewController {
         print(124)
     }
     
+    @objc func handleDismissal() {
+        dismissInfoView(pokemon: nil)
+    }
+    
     // MARK: - API
     
     func fetchPokemon() {
@@ -54,6 +58,16 @@ class PokedexController: UICollectionViewController {
     }
     
     // MARK: - Helper functions
+    
+    func dismissInfoView(pokemon: Pokemon?) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.visualEffectView.alpha = 0
+            self.infoView.alpha = 0
+            self.infoView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        }) { (_) in
+            self.infoView.removeFromSuperview()
+        }
+    }
     
     func configureViewComponents() {
         collectionView.backgroundColor = .white
@@ -74,6 +88,9 @@ class PokedexController: UICollectionViewController {
         view.addSubview(visualEffectView)
         visualEffectView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         visualEffectView.alpha = 0
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleDismissal))
+        visualEffectView.addGestureRecognizer(gesture)
         
     }
 }
@@ -137,12 +154,6 @@ extension PokedexController: PokedexCellDelegate {
 extension PokedexController: InfoViewDelegate {
     func dismissinfoView(withPokemon pokemon: Pokemon?) {
         
-        UIView.animate(withDuration: 0.5, animations: {
-            self.visualEffectView.alpha = 0
-            self.infoView.alpha = 0
-            self.infoView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        }) { (_) in
-            self.infoView.removeFromSuperview()
-        }
+        dismissInfoView(pokemon: pokemon)
     }
 }
