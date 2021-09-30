@@ -84,5 +84,6 @@ class PokedexCell: UICollectionViewCell {
         
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
         self.addGestureRecognizer(longPressGestureRecognizer)
+        
     }
 }

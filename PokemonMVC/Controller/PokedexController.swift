@@ -109,7 +109,13 @@ extension PokedexController: PokedexCellDelegate {
         infoView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         infoView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -44).isActive = true
         
+        infoView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        infoView.alpha = 0
         
+        UIView.animate(withDuration: 0.5) {
+            self.infoView.alpha = 1
+            self.infoView.transform = .identity
+        }
         
     }
     
