@@ -20,6 +20,12 @@ class PokedexController: UICollectionViewController {
         view.layer.cornerRadius = 5
         return view
     }()
+    
+    let visualEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let view = UIVisualEffectView(effect: blurEffect)
+        return view
+    }()
 
     // MARK: - Init
     
@@ -64,7 +70,11 @@ class PokedexController: UICollectionViewController {
         navigationItem.rightBarButtonItem?.tintColor = .white
         
         collectionView.register(PokedexCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    
+        
+        view.addSubview(visualEffectView)
+        visualEffectView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        visualEffectView.alpha = 0
+        
     }
 }
 
@@ -104,6 +114,8 @@ extension PokedexController: PokedexCellDelegate {
     func presentInfoView(withPokemon pokemon: Pokemon) {
         
         view.addSubview(infoView)
+        infoView.delegate = self
+        infoView.pokemon = pokemon
         infoView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width - 64, height: 350)
         
         infoView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -113,11 +125,24 @@ extension PokedexController: PokedexCellDelegate {
         infoView.alpha = 0
         
         UIView.animate(withDuration: 0.5) {
+            self.visualEffectView.alpha = 0.8
             self.infoView.alpha = 1
             self.infoView.transform = .identity
         }
         
     }
     
-    
+}
+
+extension PokedexController: InfoViewDelegate {
+    func dismissinfoView(withPokemon pokemon: Pokemon?) {
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.visualEffectView.alpha = 0
+            self.infoView.alpha = 0
+            self.infoView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        }) { (_) in
+            self.infoView.removeFromSuperview()
+        }
+    }
 }

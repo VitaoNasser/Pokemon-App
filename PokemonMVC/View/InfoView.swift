@@ -7,9 +7,21 @@
 
 import UIKit
 
+protocol InfoViewDelegate {
+    func dismissinfoView(withPokemon pokemon: Pokemon?)
+}
+
 class InfoView: UIView {
     
     // MARK: - Properties
+    
+    var delegate: InfoViewDelegate?
+    
+    var pokemon: Pokemon? {
+        didSet {
+            print("Pokemon did set..")
+        }
+    }
     
     let imageView: UIView = {
         let iv = UIImageView()
@@ -109,7 +121,8 @@ class InfoView: UIView {
     // MARK: - Selectors
     
     @objc func handleViewMoreInfo() {
-        print("Handle View More Info..")
+        guard let pokemon = self.pokemon else { return }
+        delegate?.dismissinfoView(withPokemon: pokemon)
     }
     
     // MARK: - Helper Functions
