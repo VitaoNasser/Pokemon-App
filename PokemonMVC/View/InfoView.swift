@@ -20,9 +20,22 @@ class InfoView: UIView {
     var pokemon: Pokemon? {
         didSet {
             guard let pokemon = self.pokemon else { return }
+            guard let type = pokemon.type else { return }
+            guard let defense = pokemon.defense else { return }
+            guard let attack = pokemon.attack else { return }
+            guard let id = pokemon.id else { return }
+            guard let height = pokemon.height else { return }
+            guard let weight = pokemon.weight else { return }
             
             imageView.image = pokemon.image
             nameLabel.text = pokemon.name
+            
+            configureLabel(label: typeLabel, title: "Type", details: type)
+            configureLabel(label: defenseLabel, title: "Defense", details: "\(defense)")
+            configureLabel(label: heightLabel, title: "Height", details: "\(height)")
+            configureLabel(label: weightLabel, title: "Weight", details: "\(weight)")
+            configureLabel(label: pokedexIdLabel, title: "Pokemon Id", details: "\(id)")
+            configureLabel(label: attackLabel, title: "Attack", details: "\(attack)")
         }
     }
     
@@ -129,6 +142,13 @@ class InfoView: UIView {
     }
     
     // MARK: - Helper Functions
+    
+    func configureLabel(label: UILabel, title: String, details: String) {
+        let attributedText = NSMutableAttributedString(attributedString: NSAttributedString(string: "\(title): ", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.mainPink()]))
+        
+        attributedText.append(NSAttributedString(string: "\(details)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor : UIColor.gray]))
+        label.attributedText = attributedText
+    }
     
     func configureViewComponents() {
         
