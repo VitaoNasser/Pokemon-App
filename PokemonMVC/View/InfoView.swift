@@ -19,11 +19,14 @@ class InfoView: UIView {
     
     var pokemon: Pokemon? {
         didSet {
-            print("Pokemon did set..")
+            guard let pokemon = self.pokemon else { return }
+            
+            imageView.image = pokemon.image
+            nameLabel.text = pokemon.name
         }
     }
     
-    let imageView: UIView = {
+    let imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleToFill
         iv.backgroundColor = .lightGray
