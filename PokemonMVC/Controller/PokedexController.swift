@@ -13,6 +13,8 @@ class PokedexController: UICollectionViewController {
 
     // MARK: - Properties
     
+    var searchBar: UISearchBar!
+    
     var pokemon = [Pokemon]()
     
     let infoView: InfoView = {
@@ -39,7 +41,7 @@ class PokedexController: UICollectionViewController {
     // MARK: - Selectors
     
     @objc func showSearchBar() {
-        print(124)
+        configureSearchBar()
     }
     
     @objc func handleDismissal() {
@@ -59,6 +61,18 @@ class PokedexController: UICollectionViewController {
     
     // MARK: - Helper functions
     
+    func configureSearchBar() {
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.sizeToFit()
+        searchBar.showsCancelButton = true
+        searchBar.becomeFirstResponder()
+        searchBar.tintColor = .white
+        
+        navigationItem.rightBarButtonItem = nil
+        navigationItem.titleView = searchBar
+    }
+    
     func dismissInfoView(pokemon: Pokemon?) {
         UIView.animate(withDuration: 0.5, animations: {
             self.visualEffectView.alpha = 0
@@ -77,6 +91,7 @@ class PokedexController: UICollectionViewController {
         navigationController?.navigationBar.isTranslucent = false
         
         navigationItem.title = "Pokedex"
+        
         let textAtributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAtributes
         
@@ -95,6 +110,20 @@ class PokedexController: UICollectionViewController {
     }
 }
 
+// MARK: - UISearchBarDelegate
+
+extension PokedexController: UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        navigationItem.titleView = nil
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearchBar))
+        navigationItem.rightBarButtonItem?.tintColor = .white
+    }
+    
+}
+
+// MARK: - UICollectionViewDataSource/Delegate
+
 extension PokedexController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -111,6 +140,8 @@ extension PokedexController {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+
 extension PokedexController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -125,6 +156,8 @@ extension PokedexController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+// MARK: - PokedesCellDelegate
 
 extension PokedexController: PokedexCellDelegate {
     
