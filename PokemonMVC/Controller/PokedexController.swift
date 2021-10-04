@@ -42,7 +42,7 @@ class PokedexController: UICollectionViewController {
     // MARK: - Selectors
     
     @objc func showSearchBar() {
-        configureSearchBar()
+        configureSearchBar(shouldShow: true)
     }
     
     @objc func handleDismissal() {
@@ -62,16 +62,29 @@ class PokedexController: UICollectionViewController {
     
     // MARK: - Helper functions
     
-    func configureSearchBar() {
-        searchBar = UISearchBar()
-        searchBar.delegate = self
-        searchBar.sizeToFit()
-        searchBar.showsCancelButton = true
-        searchBar.becomeFirstResponder()
-        searchBar.tintColor = .white
-        
-        navigationItem.rightBarButtonItem = nil
-        navigationItem.titleView = searchBar
+    func showPokemonInfoController(withPokemon pokemon: Pokemon) {
+        let controller = PokemonInfoController()
+        controller.pokemon = pokemon
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func configureSearchBar(shouldShow: Bool) {
+        if shouldShow {
+            searchBar = UISearchBar()
+            searchBar.delegate = self
+            searchBar.sizeToFit()
+            searchBar.showsCancelButton = true
+            searchBar.becomeFirstResponder()
+            searchBar.tintColor = .white
+            
+            navigationItem.rightBarButtonItem = nil
+            navigationItem.titleView = searchBar
+        } else {
+            navigationItem.titleView = nil
+            configureSearchBarButton()
+            inSearchMode = false
+            collectionView.reloadData()
+        }
     }
     
     func configureSearchBarButton() {
@@ -86,6 +99,9 @@ class PokedexController: UICollectionViewController {
             self.infoView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         }) { (_) in
             self.infoView.removeFromSuperview()
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
+            guard let pokemon = pokemon else { return }
+            self.showPokemonInfoController(withPokemon: pokemon)
         }
     }
     
@@ -120,10 +136,7 @@ class PokedexController: UICollectionViewController {
 extension PokedexController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        navigationItem.titleView = nil
-        configureSearchBarButton()
-        inSearchMode = false
-        collectionView.reloadData()
+        configureSearchBar(shouldShow: false)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -160,9 +173,9 @@ extension PokedexController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let controller = PokemonInfoController()
-        controller.pokemon = inSearchMode ? filteredPokemon[indexPath.row] : pokemon[indexPath.row]
-        navigationController?.pushViewController(controller, animated: true)
+        let poke = inSearchMode ? filteredPokemon[indexPath.row] : pokemon[indexPath.row]
+        
+        showPokemonInfoController(withPokemon: poke)
         
     }
 }
@@ -190,6 +203,9 @@ extension PokedexController: PokedexCellDelegate {
     
     func presentInfoView(withPokemon pokemon: Pokemon) {
         
+        configureSearchBar(shouldShow: false)
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
         view.addSubview(infoView)
         infoView.configureViewComponents()
         infoView.delegate = self
@@ -207,9 +223,7 @@ extension PokedexController: PokedexCellDelegate {
             self.infoView.alpha = 1
             self.infoView.transform = .identity
         }
-        
     }
-    
 }
 
 extension PokedexController: InfoViewDelegate {
