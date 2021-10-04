@@ -166,9 +166,6 @@ class InfoView: UIView {
 
         addSubview(attackLabel)
         attackLabel.anchor(top: pokedexIdLabel.bottomAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 16, paddingLeft: 0, paddingBottom: 0, paddingRight: -8, width: 0, height: 0)
-        
-        addSubview(infoButton)
-        infoButton.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: -12, paddingRight: -12, width: 0, height: 50)
     }
         
     
