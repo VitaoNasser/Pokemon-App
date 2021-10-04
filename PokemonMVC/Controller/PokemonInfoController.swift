@@ -16,6 +16,7 @@ class PokemonInfoController: UIViewController {
             navigationItem.title = pokemon?.name?.capitalized
             imageView.image = pokemon?.image
             infoLabel.text = pokemon?.description
+            infoView.pokemon = pokemon
         }
     }
     
@@ -30,6 +31,12 @@ class PokemonInfoController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 14)
         label.numberOfLines = 0
         return label
+    }()
+    
+    let infoView: InfoView = {
+        let view = InfoView()
+        view.configureViewForInfoController()
+        return view
     }()
     
     
@@ -49,9 +56,13 @@ class PokemonInfoController: UIViewController {
         imageView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 44, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
         
         view.addSubview(infoLabel)
-        infoLabel.anchor(top: nil, left: imageView.rightAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 44, paddingLeft: 16, paddingBottom: 0, paddingRight: 4, width: 0, height: 0)
+        infoLabel.anchor(top: nil, left: imageView.rightAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 44, paddingLeft: 16, paddingBottom: 0, paddingRight: -4, width: 0, height: 0)
         infoLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor).isActive = true
         
+        view.addSubview(infoView)
+        infoView.anchor(top: infoLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 200)
         
+        guard let pokemon = self.pokemon else { return }
+         
     }
 }
