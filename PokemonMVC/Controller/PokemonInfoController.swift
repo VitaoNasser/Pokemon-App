@@ -11,6 +11,12 @@ class PokemonInfoController: UIViewController {
     
     // MARK: - Properties
     
+    var pokemon: Pokemon? {
+        didSet {
+            navigationItem.title = pokemon?.name?.capitalized
+        }
+    }
+    
     
     // MARK: - Init
     
