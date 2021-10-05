@@ -17,6 +17,15 @@ class PokemonInfoController: UIViewController {
             imageView.image = pokemon?.image
             infoLabel.text = pokemon?.description
             infoView.pokemon = pokemon
+           
+            if let evoArray = pokemon?.evoArray {
+                if evoArray.count > 1 {
+                    firstEvoImageView.image = evoArray[0].image
+                    secondEvoImageView.image = evoArray[1].image
+                } else {
+                    firstEvoImageView.image = evoArray[0].image
+                }
+            }
         }
     }
     
@@ -54,7 +63,7 @@ class PokemonInfoController: UIViewController {
     let evoLabel: UILabel = {
         let evoLabel = UILabel()
         evoLabel.textColor = .white
-        evoLabel.text = "Next Evolution: Charmeleon"
+        evoLabel.text = "Evolution Chain"
         evoLabel.font = UIFont.systemFont(ofSize: 18)
         return evoLabel
     }()
@@ -62,14 +71,12 @@ class PokemonInfoController: UIViewController {
     let firstEvoImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        iv.backgroundColor = .gray
         return iv
     }()
     
     let secondEvoImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
-        iv.backgroundColor = .gray
         return iv
     }()
     
@@ -78,6 +85,8 @@ class PokemonInfoController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewComponents()
+        
+        
     }
     
     // MARK: - Helper Functions

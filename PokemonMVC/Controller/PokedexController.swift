@@ -176,16 +176,14 @@ extension PokedexController {
 
         var pokemonEvoArray = [Pokemon]()
         
-        guard let evoChain = poke.evolutionChain else { return }
-        let evolutionChain = EvolutionChain(evolutionArray: evoChain)
-        let evoIds = evolutionChain.evolutionIds
-        
-        evoIds.forEach { (id) in
-            pokemonEvoArray.append(pokemon[id - 1])
-        }
-        
-        pokemonEvoArray.forEach { (pokemon) in
-            print(pokemon.name)
+        if let evoChain = poke.evolutionChain {
+            let evolutionChain = EvolutionChain(evolutionArray: evoChain)
+            let evoIds = evolutionChain.evolutionIds
+            
+            evoIds.forEach { (id) in
+                pokemonEvoArray.append(pokemon[id - 1])
+            }
+            poke.evoArray = pokemonEvoArray
         }
         
         showPokemonInfoController(withPokemon: poke)

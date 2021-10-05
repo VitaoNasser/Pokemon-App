@@ -23,7 +23,9 @@ struct EvolutionChain {
         evolutionArray.forEach({ (dictionary) in
             if let idString = dictionary["id"] as? String {
                 guard let id = Int(idString) else { return }
-                results.append(id)
+                if id <= 151 {
+                    results.append(id)
+                }
             }
         })
         return results
@@ -44,6 +46,7 @@ class Pokemon {
     var type: String?
     var baseExperience: Int?
     var evolutionChain: [[String: AnyObject]]?
+    var evoArray: [Pokemon]?
     
     init(id: Int, dictionary: [String: AnyObject]) {
         
