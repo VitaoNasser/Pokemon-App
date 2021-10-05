@@ -36,6 +36,8 @@ class InfoView: UIView {
             configureLabel(label: weightLabel, title: "Weight", details: "\(weight)")
             configureLabel(label: pokedexIdLabel, title: "Pokemon Id", details: "\(id)")
             configureLabel(label: attackLabel, title: "Attack", details: "\(attack)")
+            
+            print(pokemon.evolutionChain)
         }
     }
     
